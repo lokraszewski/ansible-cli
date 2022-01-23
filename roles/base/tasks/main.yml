@@ -1,0 +1,17 @@
+---
+- name: Include distibution vars
+  include_vars: "{{ ansible_distribution }}.yml"
+
+- name: ensure ansible is the latest version
+  tags: base,ansible
+  package:
+    name: ansible
+    state: present
+
+- block:
+  - import_tasks: software/repos.yml
+  - import_tasks: software/dev.yml
+  - import_tasks: software/pip.yml
+  - import_tasks: software/util.yml
+
+  - import_tasks: software/cleanup.yml

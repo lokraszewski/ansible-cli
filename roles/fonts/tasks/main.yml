@@ -1,0 +1,53 @@
+---
+- name: Set fonts dir
+  set_fact:
+    font_dir: "{{ 'Library/Fonts' if ansible_os_family == 'Darwin' else '.local/share/fonts' }}"
+
+- name: Install fontconfig
+  become: "{{ ansible_os_family == 'Debian' }}"
+  package:
+    state: present
+    name: "{{ item }}"
+  with_items:
+    - fontconfig
+  tags:
+    - packages
+    - fonts
+
+- name: Download powerline-fonts repository from github
+  git:
+    repo: 'https://github.com/powerline/fonts.git'
+    dest: /tmp/powerline-fonts
+  tags:
+    - fonts
+
+- name: Ensure a local fonts directory exists
+  file:
+    dest: "{{ home_dir }}/{{ font_dir }}"
+    state: directory
+    owner: "{{ user }}"
+  tags:
+    - fonts
+
+# TODO: make this hashable
+- name: Copy fonts
+  command: cp -r /tmp/powerline-fonts/{{ item }} "{{ home_dir }}/{{ font_dir }}/"
+  with_items: "{{ powerline_fonts }}"
+  tags:
+    - powerline-fonts
+
+- name: set fonts directory ownership
+  file:
+    dest:  "{{ home_dir }}/{{ font_dir }}/{{ item }}"
+    state: directory
+    owner: "{{ user }}"
+  with_items: "{{ powerline_fonts }}"
+  tags:
+    - fonts
+
+- name: Reset font cache
+  command: fc-cache -v {{ home_dir }}/{{ font_dir }}
+  register: stdout
+  changed_when: "'new cache contents' in stdout.stdout"
+  tags:
+    - fonts

@@ -1,0 +1,7 @@
+---
+- name: create .ssh directory
+  tags: dotfiles,ssh
+  file:
+    dest: "{{ home_dir }}/.ssh"
+    state: directory
+    mode: 0700

@@ -1,0 +1,14 @@
+version: '3.6'
+services:
+  dotfiles:
+    image: lokraszewski.cli-ansible
+    build:
+      context: "."
+      dockerfile: "Dockerfile"
+    networks:
+      - "default"
+    user: "root"
+    entrypoint:
+      - "/bin/zsh"
+networks:
+  default:

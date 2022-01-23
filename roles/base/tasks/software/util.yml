@@ -1,0 +1,41 @@
+- name: utilities | install utility packages
+  tags: packages,system,settings
+  package:
+    state: present
+    name:
+      - "{{ dns_utils_package }}"
+      - "{{ lm_sensors_package }}"
+      - "{{ nfs_client_package }}"
+      - "{{ rename_package }}"
+      - "{{ vim_package }}"
+      - at
+      - colordiff
+      - curl
+      - htop
+      - iotop
+      - lsof
+      - mosh
+      - ncdu
+      - neofetch
+      - net-tools
+      - nmap
+      - ranger
+      - rsync
+      - silversearcher-ag
+      - sshfs
+      - tldr
+      - tmux
+      - traceroute
+      - wget
+      - whois
+      - zsh
+      - tmux
+
+- name: base | utilities | install man-pages (arch)
+  tags: packages,system,settings
+  pacman:
+    state: present
+    name:
+      - man-db
+      - man-pages
+  when: ansible_distribution == "Archlinux"

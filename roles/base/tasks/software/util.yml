@@ -26,6 +26,7 @@
       - tldr
       - tmux
       - traceroute
+      - tree
       - wget
       - whois
       - zsh
@@ -38,7 +39,3 @@
       - man-db
       - man-pages
   when: ansible_distribution == "Archlinux"
-
-
-
-

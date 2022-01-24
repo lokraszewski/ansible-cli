@@ -28,6 +28,13 @@
     - { src: 'zaw.zsh', dest: '.zsh.d/zaw.zsh' }
     - { src: 'zplug.zsh', dest: '.zsh.d/zplug.zsh' }
 
+- name: Clone zplug Zsh Plugin Manager
+  tags: dotfiles,zsh
+  git:
+    repo: https://github.com/zplug/zplug
+    dest: "{{ home_dir }}/.zplug"
+    version: "2.4.2"
+
 - name: Change user shell to zsh
   tags: zsh
   become: true

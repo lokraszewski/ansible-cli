@@ -1,34 +1,11 @@
 # cli-ansible
-## Roles
-
-- git
-- zsh
-- htop
-- tmux
-- inputrc
-- vim
-- packages
-- pip
-- utils
-- devtools
-- fonts
-
-## Objectives
-I have been using this repo to learn Ansible. Here are my objectives:
-- [ ] Install dotfiles for given user.
-  - [ ] Consider using the logged in user
-- [ ] Setup my user account (variable)
-  - [ ] Default shell
-
-TODO:
-- [ ] Autoupdate
-- [ ] Fix the needless copy of font files
+This repository contains my personal dotfile setup for CLI. If you wish to try it out for yourself please use the docker container to avoid messing up your local environment. I would recommend that you fork this repository and adapt it for your own needs rather than using it directly.
 ## Install
-Run locally:
+### Locally
 ```
 ❯ asible-playbook --ask-become-pass cli.yml
 ```
-## docker
+### Docker
 I would highly recommend you checkout how this works in a Docker container before you try to run this on your own system.
 Build the image like so:
 ```
@@ -41,3 +18,9 @@ Then run:
 ❯ docker run -it --rm lokraszewski.cli-ansible:latest /bin/zsh
 ```
 This way you can play around with my CLI setup without messing up your local machine.
+
+### ansible-pull
+You can run this playbook directly from the repo:
+```
+ansible-pull -K -U https://github.com/lokraszewski/cli-ansible.git cli.yml
+```

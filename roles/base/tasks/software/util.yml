@@ -9,6 +9,7 @@
       - "{{ rename_package }}"
       - "{{ vim_package }}"
       - at
+      - bat
       - colordiff
       - curl
       - htop
@@ -39,3 +40,9 @@
       - man-db
       - man-pages
   when: ansible_distribution == "Archlinux"
+
+- name: Create symbolic link to batcat
+  file:
+   src: "/usr/bin/batcat"
+   dest: "{{ home_dir }}/.local/bin/bat"
+   state: link

@@ -14,4 +14,4 @@ RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
 
 COPY . cli-ansible/
 RUN cd cli-ansible && ./bin/bootstrap.sh
-RUN cd cli-ansible && ansible-playbook cli.yml
+RUN cd cli-ansible && ansible-playbook local.yml

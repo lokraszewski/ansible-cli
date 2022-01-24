@@ -22,28 +22,31 @@
     - fonts
 
 - name: Ensure a local fonts directory exists
+  tags: fonts
   file:
     dest: "{{ home_dir }}/{{ font_dir }}"
     state: directory
     owner: "{{ user }}"
-  tags:
-    - fonts
+    mode: 0700
 
-# TODO: make this hashable
-- name: Copy fonts
-  command: cp -r /tmp/powerline-fonts/{{ item }} "{{ home_dir }}/{{ font_dir }}/"
-  with_items: "{{ powerline_fonts }}"
-  tags:
-    - powerline-fonts
-
-- name: set fonts directory ownership
+- name: Create font directories
+  tags: fonts
   file:
-    dest:  "{{ home_dir }}/{{ font_dir }}/{{ item }}"
+    dest: "{{ home_dir }}/{{ font_dir }}/{{ item.font_family }}"
     state: directory
     owner: "{{ user }}"
-  with_items: "{{ powerline_fonts }}"
-  tags:
-    - fonts
+    mode: 0700
+  with_items: "{{ fonts }}"
+
+- name: Copy font files
+  tags: fonts
+  copy:
+    src: "{{ item.0.src_dir }}/{{ item.0.font_family }}/{{ item.1 }}"
+    dest: "{{ home_dir }}/{{ font_dir }}/{{ item.0.font_family }}/{{ item.1 }}"
+    mode: 0600
+  with_subelements:
+    - "{{ fonts }}"
+    - font_files
 
 - name: Reset font cache
   command: fc-cache -v {{ home_dir }}/{{ font_dir }}

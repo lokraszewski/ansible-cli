@@ -1,3 +1,3 @@
 # TODOs
 - [ ] Autoupdate
-- [ ] Fix the needless copy of font files
+- [x] Fix the needless copy of font files

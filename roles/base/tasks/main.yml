@@ -2,23 +2,6 @@
 - name: Include distibution vars
   include_vars: "{{ ansible_distribution }}.yml"
 
-- name: ensure ansible is the latest version
-  tags: base,ansible
-  become: true
-  package:
-    name: ansible
-    state: present
-
-- name: ansible setup | generate provision script from template
-  tags: ansible,ansible-setup,scripts
-  become: true
-  template:
-    src: cli_ansible_pull.sh.j2
-    dest: /usr/local/bin/cli_ansible_pull.sh
-    owner: root
-    group: root
-    mode: 0755
-
 - name : Create user .local/bin
   tags: packages,bat
   file:
@@ -33,4 +16,5 @@
   - import_tasks: software/pip.yml
   - import_tasks: software/util.yml
   - import_tasks: software/cleanup.yml
+  - import_tasks: ansible.yml
   - import_tasks: cron.yml

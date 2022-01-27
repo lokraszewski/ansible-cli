@@ -1,5 +1,6 @@
 - name: development packages | install packages
   tags: dev,development,packages,python,ruby
+  become: true
   package:
     name:
       - jq
@@ -12,4 +13,5 @@
       - "{{ python_pyflakes_package }}"
       - python-setuptools
       - "{{ python_virtualenv_package }}"
+      - "{{ ctags_package }}"
     state: present

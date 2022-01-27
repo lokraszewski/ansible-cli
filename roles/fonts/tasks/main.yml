@@ -24,7 +24,7 @@
 - name: Ensure a local fonts directory exists
   tags: fonts
   file:
-    dest: "{{ home_dir }}/{{ font_dir }}"
+    dest: "{{ user_home }}/{{ font_dir }}"
     state: directory
     owner: "{{ user }}"
     mode: 0700
@@ -32,7 +32,7 @@
 - name: Create font directories
   tags: fonts
   file:
-    dest: "{{ home_dir }}/{{ font_dir }}/{{ item.font_family }}"
+    dest: "{{ user_home }}/{{ font_dir }}/{{ item.font_family }}"
     state: directory
     owner: "{{ user }}"
     mode: 0700
@@ -42,14 +42,14 @@
   tags: fonts
   copy:
     src: "{{ item.0.src_dir }}/{{ item.0.font_family }}/{{ item.1 }}"
-    dest: "{{ home_dir }}/{{ font_dir }}/{{ item.0.font_family }}/{{ item.1 }}"
+    dest: "{{ user_home }}/{{ font_dir }}/{{ item.0.font_family }}/{{ item.1 }}"
     mode: 0600
   with_subelements:
     - "{{ fonts }}"
     - font_files
 
 - name: Reset font cache
-  command: fc-cache -v {{ home_dir }}/{{ font_dir }}
+  command: fc-cache -v {{ user_home }}/{{ font_dir }}
   register: stdout
   changed_when: "'new cache contents' in stdout.stdout"
   tags:

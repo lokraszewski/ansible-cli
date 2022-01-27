@@ -16,31 +16,14 @@
       when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - hosts: localhost
-  tasks:
-  - name: Run whoami without become
-    command: whoami
-    changed_when: false
-    become: no
-    register: whoami
-
-- hosts: localhost
-  vars:
-    user: '{{ ansible_env.USER | default(whoami.stdout) }}'
-    user_email: work@lokraszewski.com
-    user_name: "Lukasz Okraszewski"
-    home_dir: '{{ ansible_env.HOME }}'
-    ansible_pull_schedule: '*/15 * * * *'
-    ansible_logfile: /var/log/ansible-pull.log
-    cli_repo_url: https://github.com/lokraszewski/cli-ansible.git
   roles:
-    - role: base # Install baseline packages
+    - role: base
     - role: zsh
     - role: tmux
     - role: fonts
     - role: git
     - role: ssh
     - role: vim
-
 
 - hosts: all
   become: yes

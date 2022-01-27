@@ -5,10 +5,9 @@
 - name : Create user .local/bin
   tags: packages,bat
   file:
-    dest:  "{{ home_dir }}/.local/bin"
+    dest:  "{{ user_home }}/.local/bin"
     state: directory
     mode: 0700
-    owner: "{{ user }}"
 
 - block:
   - import_tasks: software/repos.yml

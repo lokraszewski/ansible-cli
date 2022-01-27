@@ -44,5 +44,5 @@
 - name: Create symbolic link to batcat
   file:
    src: "/usr/bin/batcat"
-   dest: "{{ home_dir }}/.local/bin/bat"
+   dest: "{{ user_home }}/.local/bin/bat"
    state: link

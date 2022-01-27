@@ -2,7 +2,7 @@
 - name: Create config directories
   tags: dotfiles,nvim,vim
   file:
-    dest: "{{ home_dir }}/{{ item.dir }}"
+    dest: "{{ user_home }}/{{ item.dir }}"
     state: directory
     mode: 0700
   with_items:
@@ -12,7 +12,7 @@
   tags: dotfiles,nvim,vim
   copy:
     src: "{{ item.src }}"
-    dest: "{{ home_dir }}/.config/nvim/{{ item.dest }}"
+    dest: "{{ user_home }}/.config/nvim/{{ item.dest }}"
     mode: 0600
   with_items:
     - { src: 'init.vim', dest: 'init.vim' }

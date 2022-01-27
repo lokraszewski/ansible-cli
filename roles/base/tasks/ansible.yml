@@ -1,38 +1,7 @@
-
-
+---
 - name: ensure ansible is the latest version
   tags: base,ansible
   become: true
   package:
     name: ansible
     state: present
-
-- name: ansible setup | create ansible log file
-  tags: ansible,ansible-setup
-  become: true
-  file:
-    path: "{{ ansible_logfile }}"
-    owner: "{{ user }}"
-    mode: 0664
-    state: touch
-  changed_when: False
-
-- name: ansible setup | add logrotate config for ansible log file
-  tags: ansible-setup
-  become: true
-  template:
-    src: logrotate.j2
-    dest: /etc/logrotate.d/ansible
-    owner: root
-    group: root
-    mode: 0644
-
-- name: Create crontab entry to clone/pull git repository
-  tags: ansible,ansible-setup,scripts
-  become: true
-  template:
-    src: ansible_pull.j2
-    dest: /etc/cron.d/ansible-pull
-    owner: root
-    group: root
-    mode: 0644

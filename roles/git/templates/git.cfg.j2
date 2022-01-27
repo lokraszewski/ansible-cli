@@ -2,7 +2,7 @@
   path = .gitalias
 
 [user]
-        email = {{ user_email | default("work@lokraszewski.com") }}
-        name = {{ user_name | default("Lukasz Okraszewski") }}
+        email = {{ git_email | default("work@lokraszewski.com") }}
+        name = {{ full_name | default("Lukasz Okraszewski") }}
 [core]
         editor = nvim

@@ -2,7 +2,7 @@
 - name: Create config directories
   tags: dotfiles,zsh
   file:
-    dest: "{{ home_dir }}/{{ item.dir }}"
+    dest: "{{ user_home }}/{{ item.dir }}"
     state: directory
     mode: 0700
   with_items:
@@ -12,7 +12,7 @@
   tags: dotfiles,zsh
   copy:
     src: "{{ item.src }}"
-    dest: "{{ home_dir }}/{{ item.dest }}"
+    dest: "{{ user_home }}/{{ item.dest }}"
     mode: 0600
   with_items:
     - { src: 'zshrc', dest: '.zshrc' }
@@ -32,7 +32,7 @@
   tags: dotfiles,zsh
   git:
     repo: https://github.com/zplug/zplug
-    dest: "{{ home_dir }}/.zplug"
+    dest: "{{ user_home }}/.zplug"
     version: "2.4.2"
 
 - name: Change user shell to zsh

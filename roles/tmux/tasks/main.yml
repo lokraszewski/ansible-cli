@@ -2,7 +2,7 @@
 - name: Create config directories
   tags: dotfiles,tmux
   file:
-    dest: "{{ home_dir }}/{{ item.dir }}"
+    dest: "{{ user_home }}/{{ item.dir }}"
     state: directory
     mode: 0700
   with_items:
@@ -15,7 +15,7 @@
   tags: dotfiles,tmux
   copy:
     src: "{{ item.src }}"
-    dest: "{{ home_dir }}/{{ item.dest }}"
+    dest: "{{ user_home }}/{{ item.dest }}"
     mode: 0600
   with_items:
     - { src: 'tmux.conf', dest: '.tmux.conf' }
@@ -25,7 +25,7 @@
   tags: dotfiles,tmux
   copy:
     src: "{{ item.src }}"
-    dest: "{{ home_dir }}/.tmux/functions/{{ item.dest }}"
+    dest: "{{ user_home }}/.tmux/functions/{{ item.dest }}"
     mode: 0700
   with_items:
     - { src: 'battery.sh', dest: 'battery.sh' }
@@ -36,7 +36,7 @@
   tags: dotfiles,tmux
   git:
     repo: https://github.com/tmux-plugins/tpm
-    dest: "{{ home_dir }}/.tmux/plugins/tpm"
+    dest: "{{ user_home }}/.tmux/plugins/tpm"
     force: yes
     version: "v3.0.0"
 

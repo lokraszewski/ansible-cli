@@ -3,7 +3,7 @@
   tags: dotfiles,git
   copy:
     src: "{{ item.src }}"
-    dest: "{{ home_dir }}/{{ item.dest }}"
+    dest: "{{ user_home }}/{{ item.dest }}"
     mode: 0600
   with_items:
     - { src: 'gitalias', dest: '.gitalias' }

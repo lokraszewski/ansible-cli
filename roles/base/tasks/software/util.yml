@@ -1,5 +1,6 @@
 - name: utilities | install utility packages
   tags: packages,system,settings
+  become: true
   package:
     state: present
     name:
@@ -34,6 +35,7 @@
 
 - name: base | utilities | install man-pages (arch)
   tags: packages,system,settings
+  become: true
   pacman:
     state: present
     name:

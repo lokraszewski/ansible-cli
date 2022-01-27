@@ -1,5 +1,6 @@
 - name: repositories | add ignored packages for archlinux hosts
   tags: packages,repositories
+  become: yes
   lineinfile:
       dest: /etc/pacman.conf
       regexp: "^#?IgnorePkg"
@@ -8,6 +9,7 @@
 
 - name: repositories | add sources.list for debian hosts
   tags: non-free,repositories
+  become: yes
   copy:
     src: distribution_packages/debian_sources.list
     dest: /etc/apt/sources.list
@@ -18,6 +20,7 @@
 
 - name: repositories | add debian-backports
   tags: backports,repositories
+  become: yes
   apt_repository:
     repo: deb http://deb.debian.org/debian buster-backports main
     filename: debian-backports

@@ -3,7 +3,7 @@ This repository contains my personal dotfile setup for CLI. If you wish to try i
 ## Install
 ### Locally
 ```
-❯ asible-playbook --ask-become-pass cli.yml
+❯ asible-playbook --ask-become-pass local.yml
 ```
 ### Docker
 I would highly recommend you checkout how this works in a Docker container before you try to run this on your own system.
@@ -22,5 +22,5 @@ This way you can play around with my CLI setup without messing up your local mac
 ### ansible-pull
 You can run this playbook directly from the repo:
 ```
-ansible-pull -K -U https://github.com/lokraszewski/cli-ansible.git cli.yml
+ansible-pull -K -U https://github.com/lokraszewski/cli-ansible.git
 ```

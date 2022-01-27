@@ -1,6 +1,8 @@
 # vi: set ft=yaml :
 user_home: "{{ '~' | expanduser }}"
-user: "{{ ansible_env.USER }}"
+
+# When running as root ansible_env.USER is undefined
+user: "{{ ansible_env.USER | default('root') }}"
 git_user: lokraszewski
 git_email: work@lokraszewski.com
 full_name: "Lukasz Okraszewski"

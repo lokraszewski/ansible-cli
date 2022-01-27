@@ -1,7 +1,6 @@
 ---
 - name: software | pip packages | install black
   tags: black,packages,pip,python
-  become_user: "{{ user }}"
   pip:
     executable: /usr/bin/pip3
     state: present

@@ -1,23 +1,4 @@
-- name: ansible setup | create ansible log file
-  tags: ansible,ansible-setup
-  become: true
-  file:
-    path: /var/log/ansible.log
-    owner: "{{ user }}"
-    mode: 0664
-    state: touch
-  changed_when: False
 
-
-- name: ansible setup | add logrotate config for ansible log file
-  become: true
-  tags: ansible-setup
-  copy:
-    src: logrotate
-    dest: /etc/logrotate.d/ansible
-    owner: root
-    group: root
-    mode: 0644
 
 - name: ensure ansible is the latest version
   tags: base,ansible
@@ -26,12 +7,32 @@
     name: ansible
     state: present
 
-- name: ansible setup | generate provision script from template
+- name: ansible setup | create ansible log file
+  tags: ansible,ansible-setup
+  become: true
+  file:
+    path: "{{ ansible_logfile }}"
+    owner: "{{ user }}"
+    mode: 0664
+    state: touch
+  changed_when: False
+
+- name: ansible setup | add logrotate config for ansible log file
+  tags: ansible-setup
+  become: true
+  template:
+    src: logrotate.j2
+    dest: /etc/logrotate.d/ansible
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Create crontab entry to clone/pull git repository
   tags: ansible,ansible-setup,scripts
   become: true
   template:
-    src: cli_ansible_pull.sh.j2
-    dest: /usr/local/bin/cli_ansible_pull.sh
+    src: ansible_pull.j2
+    dest: /etc/cron.d/ansible-pull
     owner: root
     group: root
-    mode: 0755
+    mode: 0644

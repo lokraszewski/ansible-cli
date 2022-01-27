@@ -14,14 +14,14 @@
     enabled: true
   when: ansible_distribution == "Archlinux"
 
-- name: cron | schedule automatic ansible provisioning
-  tags: cron
-  cron:
-    name: "ansible provision"
-    user: "{{ user }}"
-    hour: "{{ ansible_cron_hour | default('*') }}"
-    minute: "{{ ansible_cron_minute | default('*/30') }}"
-    job: "/usr/local/bin/cli_ansible_pull.sh > /dev/null"
+# - name: cron | schedule automatic ansible provisioning
+#   tags: cron
+#   cron:
+#     name: "ansible provision"
+#     user: "{{ user }}"
+#     hour: "{{ ansible_cron_hour | default('*') }}"
+#     minute: "{{ ansible_cron_minute | default('*/30') }}"
+#     job: "/usr/local/bin/cli_ansible_pull.sh > /dev/null"
 
 - name: system setup | cron | schedule ansible cleanup at boot
   tags: cron

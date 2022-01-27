@@ -29,6 +29,9 @@
     user_email: work@lokraszewski.com
     user_name: "Lukasz Okraszewski"
     home_dir: '{{ ansible_env.HOME }}'
+    ansible_pull_schedule: '*/15 * * * *'
+    ansible_logfile: /var/log/ansible-pull.log
+    cli_repo_url: https://github.com/lokraszewski/cli-ansible.git
   roles:
     - role: base # Install baseline packages
     - role: zsh

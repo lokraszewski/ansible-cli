@@ -15,7 +15,6 @@
     dest: /etc/apt/sources.list
     backup: yes
     mode: 0664
-  notify: apt_update
   when: ansible_distribution == "Debian"
 
 - name: repositories | add debian-backports
@@ -24,7 +23,6 @@
   apt_repository:
     repo: deb http://deb.debian.org/debian buster-backports main
     filename: debian-backports
-  notify: apt_update
   when: ansible_distribution == "Debian"
 
 - name: repositories | install package management tools (debian-based)

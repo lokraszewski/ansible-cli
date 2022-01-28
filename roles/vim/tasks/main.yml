@@ -6,7 +6,7 @@
     state: directory
     mode: 0700
   with_items:
-    - { dir: '.config/nvim' }
+    - {dir: '.config/nvim'}
 
 - name: Copy config nvim
   tags: dotfiles,nvim,vim
@@ -15,4 +15,4 @@
     dest: "{{ user_home }}/.config/nvim/{{ item.dest }}"
     mode: 0600
   with_items:
-    - { src: 'init.vim', dest: 'init.vim' }
+    - {src: 'init.vim', dest: 'init.vim'}

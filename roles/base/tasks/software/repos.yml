@@ -1,36 +1,19 @@
+---
 - name: repositories | add ignored packages for archlinux hosts
   tags: packages,repositories
-  become: yes
+  become: true
   lineinfile:
       dest: /etc/pacman.conf
       regexp: "^#?IgnorePkg"
       line: "IgnorePkg   = ansible linux linux-headers linux-lts linux-lts-headers"
   when: ansible_distribution == "Archlinux"
 
-# - name: repositories | add sources.list for debian hosts
-#   tags: non-free,repositories
-#   become: yes
-#   copy:
-#     src: distribution_packages/debian_sources.list
-#     dest: /etc/apt/sources.list
-#     backup: yes
-#     mode: 0664
-#   when: ansible_distribution == "Debian"
-
-# - name: repositories | add debian-backports
-#   tags: backports,repositories
-#   become: yes
-#   apt_repository:
-#     repo: deb http://deb.debian.org/debian buster-backports main
-#     filename: debian-backports
-#   when: ansible_distribution == "Debian"
-
 - name: repositories | install package management tools (debian-based)
   tags: packages,system,settings
-  become: yes
+  become: true
   package:
-    name:
-      - aptitude
-      - software-properties-common
-    state: present
+      state: present
+      name:
+          - aptitude
+          - software-properties-common
   when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]

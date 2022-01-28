@@ -6,7 +6,7 @@
     state: directory
     mode: 0700
   with_items:
-    - { dir: '.zsh.d' }
+    - {dir: '.zsh.d'}
 
 - name: Copy configs
   tags: dotfiles,zsh
@@ -15,18 +15,18 @@
     dest: "{{ user_home }}/{{ item.dest }}"
     mode: 0600
   with_items:
-    - { src: 'zshrc', dest: '.zshrc' }
-    - { src: 'p10k.zsh', dest: '.p10k.zsh' }
-    - { src: 'alias.zsh', dest: '.zsh.d/alias.zsh' }
-    - { src: 'bindkey.zsh', dest: '.zsh.d/bindkey.zsh' }
-    - { src: 'colors.zsh', dest: '.zsh.d/colors.zsh' }
-    - { src: 'completion.zsh', dest: '.zsh.d/completion.zsh' }
-    - { src: 'environment.zsh', dest: '.zsh.d/environment.zsh' }
-    - { src: 'functions.zsh', dest: '.zsh.d/functions.zsh' }
-    - { src: 'history.zsh', dest: '.zsh.d/history.zsh' }
-    - { src: 'setopt.zsh', dest: '.zsh.d/setopt.zsh' }
-    - { src: 'zaw.zsh', dest: '.zsh.d/zaw.zsh' }
-    - { src: 'zplug.zsh', dest: '.zsh.d/zplug.zsh' }
+    - {src: 'zshrc', dest: '.zshrc'}
+    - {src: 'p10k.zsh', dest: '.p10k.zsh'}
+    - {src: 'alias.zsh', dest: '.zsh.d/alias.zsh'}
+    - {src: 'bindkey.zsh', dest: '.zsh.d/bindkey.zsh'}
+    - {src: 'colors.zsh', dest: '.zsh.d/colors.zsh'}
+    - {src: 'completion.zsh', dest: '.zsh.d/completion.zsh'}
+    - {src: 'environment.zsh', dest: '.zsh.d/environment.zsh'}
+    - {src: 'functions.zsh', dest: '.zsh.d/functions.zsh'}
+    - {src: 'history.zsh', dest: '.zsh.d/history.zsh'}
+    - {src: 'setopt.zsh', dest: '.zsh.d/setopt.zsh'}
+    - {src: 'zaw.zsh', dest: '.zsh.d/zaw.zsh'}
+    - {src: 'zplug.zsh', dest: '.zsh.d/zplug.zsh'}
 
 - name: Clone zplug Zsh Plugin Manager
   tags: dotfiles,zsh

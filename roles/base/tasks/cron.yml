@@ -1,10 +1,11 @@
+---
 - name: cron | install cron package
   tags: packages,cron
   become: true
   package:
     name:
       - "{{ cron_package }}"
-    state: latest
+    state: present
 
 - name: cron | start and enable cronie daemon
   tags: cron

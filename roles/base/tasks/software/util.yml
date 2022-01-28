@@ -1,3 +1,4 @@
+---
 - name: utilities | install utility packages
   tags: packages,system,settings
   become: true
@@ -45,6 +46,6 @@
 
 - name: Create symbolic link to batcat
   file:
-   src: "/usr/bin/batcat"
-   dest: "{{ user_home }}/.local/bin/bat"
-   state: link
+    src: "/usr/bin/batcat"
+    dest: "{{ user_home }}/.local/bin/bat"
+    state: link

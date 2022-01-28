@@ -1,3 +1,4 @@
+---
 amd_microcode_package: amd-ucode
 cron_package: cronie
 dconf_package: dconf

@@ -6,10 +6,10 @@
     state: directory
     mode: 0700
   with_items:
-    - { dir: '.tmux' }
-    - { dir: '.tmux/config' }
-    - { dir: '.tmux/plugins' }
-    - { dir: '.tmux/functions' }
+    - {dir: '.tmux'}
+    - {dir: '.tmux/config'}
+    - {dir: '.tmux/plugins'}
+    - {dir: '.tmux/functions'}
 
 - name: Copy configs
   tags: dotfiles,tmux
@@ -18,8 +18,8 @@
     dest: "{{ user_home }}/{{ item.dest }}"
     mode: 0600
   with_items:
-    - { src: 'tmux.conf', dest: '.tmux.conf' }
-    - { src: 'tmux.remote.conf', dest: '.tmux.remote.conf' }
+    - {src: 'tmux.conf', dest: '.tmux.conf'}
+    - {src: 'tmux.remote.conf', dest: '.tmux.remote.conf'}
 
 - name: Copy functions (scripts)
   tags: dotfiles,tmux
@@ -28,15 +28,14 @@
     dest: "{{ user_home }}/.tmux/functions/{{ item.dest }}"
     mode: 0700
   with_items:
-    - { src: 'battery.sh', dest: 'battery.sh' }
-    - { src: 'ip_local.sh', dest: 'ip_local.sh' }
-    - { src: 'ip_public.sh', dest: 'ip_public.sh' }
+    - {src: 'battery.sh', dest: 'battery.sh'}
+    - {src: 'ip_local.sh', dest: 'ip_local.sh'}
+    - {src: 'ip_public.sh', dest: 'ip_public.sh'}
 
 - name: Clone tmux-tpm plugin repository
   tags: dotfiles,tmux
   git:
     repo: https://github.com/tmux-plugins/tpm
     dest: "{{ user_home }}/.tmux/plugins/tpm"
-    force: yes
+    force: true
     version: "v3.0.0"
-

@@ -1,18 +1,18 @@
-# dotfiles.yml Installs dotfiles and basic packages that I use on all of my machines.
+---
 - hosts: all
   tags: always
-  become: yes
+  become: true
   tasks:
     - name: pre-run | update package cache (arch)
       tags: always
       pacman: update_cache=yes
-      changed_when: False
+      changed_when: false
       when: ansible_distribution == "Archlinux"
 
     - name: pre-run | update package cache (debian, etc)
       tags: always
       apt: update_cache=yes
-      changed_when: False
+      changed_when: false
       when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - hosts: localhost
@@ -26,18 +26,18 @@
     - role: vim
 
 - hosts: all
-  become: yes
+  become: true
   tasks:
-  - name: cleanup package cache (debian and ubuntu)
-    tags: always
-    apt:
-      autoclean: yes
-    changed_when: false
-    when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - name: cleanup package cache (debian and ubuntu)
+      tags: always
+      apt:
+        autoclean: true
+      changed_when: false
+      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
 
-  - name: autoremove orphan packages (debian and ubuntu)
-    tags: always
-    apt:
-      autoremove: yes
-      purge: yes
-    when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - name: autoremove orphan packages (debian and ubuntu)
+      tags: always
+      apt:
+        autoremove: true
+        purge: true
+      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]

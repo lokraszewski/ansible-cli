@@ -6,7 +6,7 @@
     dest: "{{ user_home }}/{{ item.dest }}"
     mode: 0600
   with_items:
-    - { src: 'gitalias', dest: '.gitalias' }
+    - {src: 'gitalias', dest: '.gitalias'}
 
 - name: git | Create gitconfig from template
   tags: dotfiles,git

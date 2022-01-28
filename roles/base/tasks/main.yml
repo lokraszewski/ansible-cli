@@ -2,18 +2,18 @@
 - name: Include distibution vars
   include_vars: "{{ ansible_distribution }}.yml"
 
-- name : Create user .local/bin
+- name: Create user .local/bin
   tags: packages,bat
   file:
-    dest:  "{{ user_home }}/.local/bin"
+    dest: "{{ user_home }}/.local/bin"
     state: directory
     mode: 0700
 
 - block:
-  - import_tasks: software/repos.yml
-  - import_tasks: software/dev.yml
-  - import_tasks: software/pip.yml
-  - import_tasks: software/util.yml
-  - import_tasks: software/cleanup.yml
-  - import_tasks: ansible.yml
-  - import_tasks: cron.yml
+    - import_tasks: software/repos.yml
+    - import_tasks: software/dev.yml
+    - import_tasks: software/pip.yml
+    - import_tasks: software/util.yml
+    - import_tasks: software/cleanup.yml
+    - import_tasks: ansible.yml
+    - import_tasks: cron.yml

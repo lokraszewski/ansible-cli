@@ -1,8 +1,4 @@
 ---
-- name: Set fonts dir
-  set_fact:
-    font_dir: "{{ 'Library/Fonts' if ansible_os_family == 'Darwin' else '.local/share/fonts' }}"
-
 - name: Install fontconfig
   become: "{{ ansible_os_family == 'Debian' }}"
   package:
@@ -18,13 +14,14 @@
   git:
     repo: 'https://github.com/powerline/fonts.git'
     dest: /tmp/powerline-fonts
+    version: 'HEAD'
   tags:
     - fonts
 
 - name: Ensure a local fonts directory exists
   tags: fonts
   file:
-    dest: "{{ user_home }}/{{ font_dir }}"
+    dest: "{{ user_home }}/.local/share/fonts"
     state: directory
     owner: "{{ user }}"
     mode: 0700
@@ -32,7 +29,7 @@
 - name: Create font directories
   tags: fonts
   file:
-    dest: "{{ user_home }}/{{ font_dir }}/{{ item.font_family }}"
+    dest: "{{ user_home }}/.local/share/fonts/{{ item.font_family }}"
     state: directory
     owner: "{{ user }}"
     mode: 0700
@@ -42,14 +39,14 @@
   tags: fonts
   copy:
     src: "{{ item.0.src_dir }}/{{ item.0.font_family }}/{{ item.1 }}"
-    dest: "{{ user_home }}/{{ font_dir }}/{{ item.0.font_family }}/{{ item.1 }}"
+    dest: "{{ user_home }}/.local/share/fonts/{{ item.0.font_family }}/{{ item.1 }}"
     mode: 0600
   with_subelements:
     - "{{ fonts }}"
     - font_files
 
 - name: Reset font cache
-  command: fc-cache -v {{ user_home }}/{{ font_dir }}
+  command: fc-cache -v {{ user_home }}/.local/share/fonts
   register: stdout
   changed_when: "'new cache contents' in stdout.stdout"
   tags:

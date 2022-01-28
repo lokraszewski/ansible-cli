@@ -6,7 +6,7 @@ This repository contains my personal dotfile setup for CLI. If you wish to try i
 ❯ asible-playbook --ask-become-pass local.yml
 ```
 ### Docker
-I would highly recommend you checkout how this works in a Docker container before you try to run this on your own system.
+I would highly recommend you checkout how this works in a Docker container before you try to run this on yuseruserour own system.
 Build the image like so:
 ```
 ❯ docker-compose build

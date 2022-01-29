@@ -23,6 +23,7 @@
     - role: fonts
     - role: git
     - role: ssh
+    - role: bat
     - role: vim
 
 - hosts: all

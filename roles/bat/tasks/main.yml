@@ -1,0 +1,15 @@
+---
+- name: Install bat
+  tags: packages,bat
+  become: true
+  package:
+    state: present
+    name:
+      - bat
+
+- name: Create symbolic link to batcat
+  tags: packages,bat
+  file:
+    src: "/usr/bin/batcat"
+    dest: "{{ user_home }}/.local/bin/bat"
+    state: link

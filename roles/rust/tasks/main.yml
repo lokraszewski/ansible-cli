@@ -1,0 +1,29 @@
+---
+- name: install requirements for cargo
+  tags: packages,rust,cargo
+  become: true
+  package:
+    name:
+      - curl
+      - file
+      - bash
+    state: present
+
+- name: download installer rustup
+  tags: packages,rust,cargo
+  get_url:
+    url: https://static.rust-lang.org/rustup.sh
+    dest: "{{ cargo_tmp }}/rustup.sh"
+    mode: "750"
+    validate_certs: false
+
+- name: run installer rustup
+  tags: packages,rust,cargo
+  become: true
+  command:
+    cmd: "./rustup.sh -y"
+    chdir: "{{ cargo_tmp }}"
+    creates: "{{ cargo_prefix }}/bin/cargo"
+  environment:
+    CARGO_HOME: "{{ cargo_prefix }}"
+    TMPDIR: "{{ cargo_tmp }}"

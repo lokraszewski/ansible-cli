@@ -1,22 +1,6 @@
 ---
 fonts:
   - font_family: Hack
-    src_dir: /tmp/powerline-fonts
+    src_dir: /tmp/fonts
     font_files:
-      - 'Hack-BoldItalic.ttf'
-      - 'Hack-Bold.ttf'
-      - 'Hack-Italic.ttf'
-      - 'Hack-Regular.ttf'
-  - font_family: SourceCodePro
-    src_dir: /tmp/powerline-fonts
-    font_files:
-      - 'Source Code Pro ExtraLight for Powerline.otf'
-      - 'Source Code Pro Bold for Powerline.otf'
-      - 'Source Code Pro for Powerline.otf'
-      - 'Source Code Pro Light for Powerline.otf'
-      - 'Source Code Pro Powerline Italic.otf'
-      - 'Source Code Pro Black for Powerline.otf'
-      - 'Source Code Pro Powerline LightItalic.otf'
-      - 'Source Code Pro Powerline MediumItalic.otf'
-      - 'Source Code Pro Powerline SemiboldItalic.otf'
-      - 'Source Code Pro Semibold for Powerline.otf'
+      - 'Hack Bold Italic Nerd Font Complete Mono.ttf'

@@ -10,40 +10,23 @@
     - packages
     - fonts
 
-- name: Download powerline-fonts repository from github
-  git:
-    repo: 'https://github.com/powerline/fonts.git'
-    dest: /tmp/powerline-fonts
-    version: 'HEAD'
-  tags:
-    - fonts
-
 - name: Ensure a local fonts directory exists
   tags: fonts
   file:
-    dest: "{{ user_home }}/.local/share/fonts"
+    dest: "{{ user_home }}/.local/share/{{ item }}"
     state: directory
     owner: "{{ user }}"
     mode: 0700
+  with_items:
+    - 'fonts'
+    - 'fonts/Hack'
 
-- name: Create font directories
+- name: Download patched Hack font
   tags: fonts
-  file:
-    dest: "{{ user_home }}/.local/share/fonts/{{ item.font_family }}"
-    state: directory
-    owner: "{{ user }}"
-    mode: 0700
-  with_items: "{{ fonts }}"
-
-- name: Copy font files
-  tags: fonts
-  copy:
-    src: "{{ item.0.src_dir }}/{{ item.0.font_family }}/{{ item.1 }}"
-    dest: "{{ user_home }}/.local/share/fonts/{{ item.0.font_family }}/{{ item.1 }}"
-    mode: 0600
-  with_subelements:
-    - "{{ fonts }}"
-    - font_files
+  unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip
+    dest: "{{ user_home }}/.local/share/fonts/Hack/"
+    remote_src: true
 
 - name: Reset font cache
   command: fc-cache -v {{ user_home }}/.local/share/fonts

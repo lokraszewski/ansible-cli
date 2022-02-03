@@ -63,10 +63,10 @@ bat_status()
       echo ''
       ;;
     charging)
-      echo '⚡'
+      echo ' '
       ;;
     *)
-      echo '🔌'
+      echo 'ﮣ '
       ;;
   esac
 }

@@ -35,9 +35,16 @@
     dest: "{{ user_home }}/.zplug"
     version: "2.4.2"
 
+
+
+# We only want to modify the shell if the user already exists in passd,
+# otherwise this can mess up LDAP systems
 - name: Change user shell to zsh
   tags: zsh
   become: true
+  vars:
+    contents: "{{ lookup('file', '/etc/passwd') }}"
+  when: contents.find( user ) != -1
   user:
     name: "{{ user }}"
     shell: /bin/zsh

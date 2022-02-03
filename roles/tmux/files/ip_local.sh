@@ -3,6 +3,12 @@ export LC_ALL=en_US.UTF-8
 
 main()
 {
+
+  if [ -f "$HOME/.hidemyass" ] ; then
+      echo '13.37.13.37'
+      return
+  fi
+
   case $(uname -s) in
     # Only Linux for now since I am lazy, also I don't own a Mac.
     Linux)

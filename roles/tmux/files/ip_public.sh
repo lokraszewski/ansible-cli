@@ -12,6 +12,11 @@ fetch()
 linux_public_ip()
 {
 
+  if [ -f "$HOME/.hidemyass" ] ; then
+      echo '13.37.13.37'
+      return
+  fi
+
   # If the file doesn't exist, create it with user only permissions.
   [ ! -f "$FILEPATH" ] && install -m 600 /dev/null "$FILEPATH" && fetch > "$FILEPATH"
 

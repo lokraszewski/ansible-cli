@@ -1,4 +1,45 @@
 ---
+- name: Clone neovim repository
+  tags: dotfiles,nvim,vim
+  git:
+    repo: https://github.com/neovim/neovim.git
+    dest: "{{ user_home }}/work/neovim"
+    version: "v0.6.1"
+
+- name: Install build requirements for neovim
+  tags: packages,nvim,vim
+  become: true
+  package:
+    name:
+      - ninja-build
+      - gettext
+      - libtool
+      - libtool-bin
+      - autoconf
+      - automake
+      - cmake
+      - g++
+      - pkg-config
+      - unzip
+      - curl
+      - doxygen
+    state: present
+
+
+- name: Build Neovim as Release
+  tags: dotfiles,nvim,vim
+  make:
+    chdir: "{{ user_home }}/work/neovim"
+    params:
+      CMAKE_BUILD_TYPE: Release
+
+- name: Install neovim
+  tags: dotfiles,nvim,vim
+  make:
+    chdir: "{{ user_home }}/work/neovim"
+    target: install
+  become: yes
+
 - name: Create config directories
   tags: dotfiles,nvim,vim
   file:

@@ -9,7 +9,6 @@
       - "{{ lm_sensors_package }}"
       - "{{ nfs_client_package }}"
       - "{{ rename_package }}"
-      - "{{ vim_package }}"
       - at
       - colordiff
       - curl

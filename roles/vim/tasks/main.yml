@@ -4,7 +4,8 @@
   git:
     repo: https://github.com/neovim/neovim.git
     dest: "{{ user_home }}/work/neovim"
-    version: "v0.6.1"
+    version: "v0.8.3"
+    update: false
 
 - name: Install build requirements for neovim
   tags: packages,nvim,vim
@@ -30,6 +31,7 @@
   tags: dotfiles,nvim,vim
   make:
     chdir: "{{ user_home }}/work/neovim"
+    target: all
     params:
       CMAKE_BUILD_TYPE: Release
 

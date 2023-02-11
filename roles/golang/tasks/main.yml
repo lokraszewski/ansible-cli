@@ -1,0 +1,25 @@
+---
+- name: Clone g repository
+  tags: dotfiles,golang,go
+  git:
+    repo: https://github.com/stefanmaric/g
+    dest: "{{ user_home }}/work/g"
+    version: "0.9.1"
+    update: false
+
+- name: golang | Install launcher
+  tags: dotfiles,golang,go
+  copy:
+    src: "{{ user_home }}/work/g/bin/g"
+    dest: "{{ user_home }}/.local/bin/g"
+    mode: 0700
+
+- name: golang | Create config directories
+  tags: dotfiles,golang,go
+  file:
+    dest: "{{ user_home }}/{{ item.dir }}"
+    state: directory
+    mode: 0700
+  with_items:
+    - {dir: '.go'}
+    - {dir: 'go'}

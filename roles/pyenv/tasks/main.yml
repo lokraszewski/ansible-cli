@@ -1,0 +1,30 @@
+---
+- name: pyenv | Python build envrioment
+  tags: dotfiles,python,pyenv
+  become: true
+  package:
+    name:
+      - build-essential
+      - libssl-dev
+      - zlib1g-dev
+      - libbz2-dev
+      - libreadline-dev
+      - libsqlite3-dev
+      - curl
+      - libncursesw5-dev
+      - xz-utils
+      - tk-dev
+      - libxml2-dev
+      - libxmlsec1-dev
+      - libffi-dev
+      - liblzma-dev
+    state: present
+
+- name: Clone pyenv repository
+  tags: dotfiles,python,pyenv
+  git:
+    repo: https://github.com/pyenv/pyenv.git
+    dest: "{{ user_home }}/.pyenv"
+    version: "v2.3.12"
+    update: false
+

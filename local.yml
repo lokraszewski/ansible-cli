@@ -27,6 +27,7 @@
     - role: bat
     - role: vim
     - role: golang
+    - role: pyenv
 
 - hosts: all
   become: true
